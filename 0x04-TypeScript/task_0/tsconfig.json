@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",   
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6", 
+    "target": "es5", 
+    "allowJs": true,
+    "moduleResolution": "node",
+        "skipLibCheck": true
+  }
+}
+
+
+// {
+//   "compilerOptions": {
+//     "target": "ES5", //----
+//     "module": "commonjs",
+//     "strict": true,
+//     "esModuleInterop": true,
+//     "skipLibCheck": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "outDir": "./dist" //---
+//   },
+//   "include": ["js/**/*.ts"],
+//   "exclude": ["node_modules"]
+// }
