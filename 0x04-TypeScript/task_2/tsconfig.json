@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+    "allowJs": true,
+    "moduleResolution": "node",
+        "skipLibCheck": true
+  }
+}
+
+
+// {
+//   "compilerOptions": {
+//     "target": "es5",                 // Compiles to ES5 for browser compatibility
+//     "module": "es6",                 // Use ES6 modules (webpack will bundle)
+//     "outDir": "./dist/",             // Compiled JS output folder
+//     "rootDir": "./js",               // Source TS files root directory
+//     "strict": true,                  // Enables all strict type-checking options
+//     "noImplicitAny": true,           // Disallow implicit any types
+//     "moduleResolution": "node",      // Resolve modules like Node.js
+//     "sourceMap": true,               // Generate source maps for debugging
+//     "allowJs": false,                // Only allow TS files (recommended)
+//     "skipLibCheck": true,            // Skip checking declaration files
+//     "esModuleInterop": true,         // For import compatibility with commonjs
+//     "forceConsistentCasingInFileNames": true
+//   },
+//   "include": ["js/**/*"],            // Include all TS files in the js folder
+//   "exclude": ["node_modules", "dist"] // Exclude dependencies and output folders
+// }
