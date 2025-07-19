@@ -1,3 +1,4 @@
+// Teacher interface
 interface Teacher{
   readonly firstName : string;
   readonly lastName : string;
@@ -12,11 +13,25 @@ interface Director extends Teacher {
   numberOfReports: number; // property specific to Directors
 }
 
+// Function interface
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 };
 
-//Example of a Teacher object
+
+// student interface
+interface StudentInterface {
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+// StudentConstructor interface
+interface StudentConstructor{
+  new(firstName: string,
+  lastName: string) : StudentInterface;
+}
+
+//Example of Teacher objects
 const teacher1: Teacher = {
   firstName: "John",
   lastName: "Ibiwoye",
@@ -66,10 +81,30 @@ const director2 : Director = {
   contract: true, //additional property
 };
 
-// Example returning printTeacherFunction first cahracter of firstname and full last name
+// Example implementing printTeacherFunction function to print first cahracter of firstname and full last name
 const printTeacher: printTeacherFunction = (firstName, lastName) => {
   return `${firstName.charAt(0)}. ${lastName}`;
 }
+
+// StudentClass implementation
+class StudentClass implements StudentInterface {
+  firstName: string;
+  lastName: string;
+
+  constructor(firstName:string, lastName:string){
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  workOnHomework(): string {
+    return "Currently working";
+  }
+
+  displayName(): string {
+    return this.firstName
+  }
+}
+const student = new StudentClass("Ayooluwa", "Philip"); //create the instance of student classs implementation
 
 console.log(teacher1);
 console.log(teacher2);
@@ -77,6 +112,8 @@ console.log(teacher3);
 console.log(director1);
 console.log(director2);
 console.log(printTeacher("John", "Doe")); // Output: J. Doe
-console.log(printTeacher("Taye", "Daniel")) // Output: T. Daniel
+console.log(printTeacher("Taye", "Daniel")); // Output: T. Daniel
+console.log(student.displayName());
+console.log(student.workOnHomework());
 
-export { printTeacher, printTeacherFunction };
+export { printTeacher, printTeacherFunction, StudentClass, StudentInterface };
