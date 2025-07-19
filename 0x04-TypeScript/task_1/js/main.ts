@@ -7,6 +7,15 @@ interface Teacher{
   [propName: string]: any; //index signature to allow additional properties
 }
 
+// director extends teacher
+interface Director extends Teacher {
+  numberOfReports: number; // property specific to Directors
+}
+
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+};
+
 //Example of a Teacher object
 const teacher1: Teacher = {
   firstName: "John",
@@ -36,10 +45,7 @@ const teacher3: Teacher = {
   age: 39,
 };
 
-interface Director extends Teacher {
-  numberOfReports: number; // property specific to Directors
-}
-
+// Example of director objects extending teacher
 const director1: Director = {
   firstName: "Taye",
   lastName: "Adekeye",
@@ -48,7 +54,7 @@ const director1: Director = {
   location: "Abuja",
   numberOfReports: 12, //specific property for Director
   contract: true, //additional property
-}
+};
 
 const director2 : Director = {
   firstName: "Tinubu",
@@ -58,6 +64,11 @@ const director2 : Director = {
   location: "Lagos",
   numberOfReports: 100, //specific property for Director
   contract: true, //additional property
+};
+
+// Example returning printTeacherFunction first cahracter of firstname and full last name
+const printTeacher: printTeacherFunction = (firstName, lastName) => {
+  return `${firstName.charAt(0)}. ${lastName}`;
 }
 
 console.log(teacher1);
@@ -65,3 +76,7 @@ console.log(teacher2);
 console.log(teacher3);
 console.log(director1);
 console.log(director2);
+console.log(printTeacher("John", "Doe")); // Output: J. Doe
+console.log(printTeacher("Taye", "Daniel")) // Output: T. Daniel
+
+export { printTeacher, printTeacherFunction };
