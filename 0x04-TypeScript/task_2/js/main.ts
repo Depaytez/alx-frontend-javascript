@@ -1,119 +1,56 @@
-// Teacher interface
-interface Teacher{
-  readonly firstName : string;
-  readonly lastName : string;
-  fullTimeEmployee: boolean;
-  yearsOfExperience?: number; //optional property
-  location: string;
-  [propName: string]: any; //index signature to allow additional properties
+// Director Interface with 3 expected methods
+interface DirectorInterface{
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workDirectorTasks(): string;
 }
 
-// director extends teacher
-interface Director extends Teacher {
-  numberOfReports: number; // property specific to Directors
+// TeacherInterface with 3 expected methods
+interface TeacherInterface {
+  workFromHome(): string;
+  getCoffeeBreak(): string;
+  workTeacherTasks(): string;
 }
 
-// Function interface
-interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
-};
-
-
-// student interface
-interface StudentInterface {
-  workOnHomework(): string;
-  displayName(): string;
-}
-
-// StudentConstructor interface
-interface StudentConstructor{
-  new(firstName: string,
-  lastName: string) : StudentInterface;
-}
-
-//Example of Teacher objects
-const teacher1: Teacher = {
-  firstName: "John",
-  lastName: "Ibiwoye",
-  fullTimeEmployee: false,
-  yearsOfExperience: 25,
-  location: "Kwara",
-  contract: true, //additional property
-};
-
-const teacher2: Teacher = {
-  firstName: "Bosede",
-  lastName: "Agbaje",
-  fullTimeEmployee: false,
-  yearsOfExperience: 20,
-  location: "Kwara",
-  contract: false, //additional property
-};
-
-const teacher3: Teacher = {
-  firstName: "John",
-  lastName: "Doe",
-  fullTimeEmployee: false,
-  // yearsOfExperience: ,
-  location: "Lagos",
-  contract: "had an ESPIN contract with the Nigerian Government",
-  age: 39,
-};
-
-// Example of director objects extending teacher
-const director1: Director = {
-  firstName: "Taye",
-  lastName: "Adekeye",
-  fullTimeEmployee: true,
-  yearsOfExperience: 30,
-  location: "Abuja",
-  numberOfReports: 12, //specific property for Director
-  contract: true, //additional property
-};
-
-const director2 : Director = {
-  firstName: "Tinubu",
-  lastName: "Bola",
-  fullTimeEmployee: true,
-  yearsOfExperience: 60,
-  location: "Lagos",
-  numberOfReports: 100, //specific property for Director
-  contract: true, //additional property
-};
-
-// Example implementing printTeacherFunction function to print first cahracter of firstname and full last name
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  return `${firstName.charAt(0)}. ${lastName}`;
-}
-
-// StudentClass implementation
-class StudentClass implements StudentInterface {
-  firstName: string;
-  lastName: string;
-
-  constructor(firstName:string, lastName:string){
-    this.firstName = firstName;
-    this.lastName = lastName;
+// implement class for DirectorInterface
+class Director implements DirectorInterface {
+  workFromHome(): string {
+    return "Working from home";
   }
-
-  workOnHomework(): string {
-    return "Currently working";
+  getCoffeeBreak(): string {
+    return "Getting a coffee break"
   }
-
-  displayName(): string {
-    return this.firstName
+  workDirectorTasks(): string {
+    return "Getting to director tasks";
   }
 }
-const student = new StudentClass("Ayooluwa", "Philip"); //create the instance of student classs implementation
 
-console.log(teacher1);
-console.log(teacher2);
-console.log(teacher3);
-console.log(director1);
-console.log(director2);
-console.log(printTeacher("John", "Doe")); // Output: J. Doe
-console.log(printTeacher("Taye", "Daniel")); // Output: T. Daniel
-console.log(student.displayName());
-console.log(student.workOnHomework());
+// implement class for TeacherInterface
+class Teacher implements TeacherInterface {
+  workFromHome(): string {
+    return "Cannot work from home";
+  }
+  getCoffeeBreak(): string {
+    return "Cannot have a break";
+  }
+  workTeacherTasks(): string {
+    return "Getting to work";
+  }
+}
 
-export { printTeacher, printTeacherFunction, StudentClass, StudentInterface };
+// createEmployee function that takes in a string and returns a TeacherInterface or DirectorInterface
+function createEmployee(salary: number | string): DirectorInterface | TeacherInterface {
+  if (typeof salary === "number" && salary < 500) {
+    return new Teacher();
+  }
+  else {
+    return new Director();
+  }
+}
+
+console.log(createEmployee(200)); // Should return an instance of Teacher
+console.log(createEmployee(1000)); // Should return an instance of Director
+console.log(createEmployee("500")); // Should return an instance of Director
+console.log(createEmployee("$1000")); // Should return an instance of Director
+
+export {Director, Teacher, createEmployee, DirectorInterface, TeacherInterface};
