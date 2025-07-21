@@ -48,9 +48,26 @@ function createEmployee(salary: number | string): DirectorInterface | TeacherInt
   }
 }
 
+// create function with type predicate specific to Director
+function isDirector(employee: Director | Teacher) : employee is Director {
+  return employee instanceof Director;
+}
+
+// create function executeWork
+function executeWork(employee: Director | Teacher) : string {
+  if (isDirector(employee)) {
+    return employee.workDirectorTasks();
+  }
+  else if (employee instanceof Teacher) {
+    return employee.workTeacherTasks();
+  }
+}
+
 console.log(createEmployee(200)); // Should return an instance of Teacher
 console.log(createEmployee(1000)); // Should return an instance of Director
 console.log(createEmployee("500")); // Should return an instance of Director
 console.log(createEmployee("$1000")); // Should return an instance of Director
+console.log(executeWork(createEmployee(200))); // Should return "Getting to work"
+console.log(executeWork(createEmployee(1000))); // Should return "Getting to director tasks"
 
 export {Director, Teacher, createEmployee, DirectorInterface, TeacherInterface};
