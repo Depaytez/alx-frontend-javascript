@@ -12,6 +12,20 @@ interface TeacherInterface {
   workTeacherTasks(): string;
 }
 
+// string literal type Subject
+type Subjects = "Math" | "History"
+function teachClass(todayClass: Subjects): string{
+  if (todayClass === "Math"){
+    return "Teaching Math";
+  }
+  else if (todayClass === "History"){
+    return "Teaching History";
+  }
+  else {
+    return "Pls, input a valid subject";
+  }
+}
+
 // implement class for DirectorInterface
 class Director implements DirectorInterface {
   workFromHome(): string {
@@ -58,7 +72,7 @@ function executeWork(employee: Director | Teacher) : string {
   if (isDirector(employee)) {
     return employee.workDirectorTasks();
   }
-  else if (employee instanceof Teacher) {
+  else {
     return employee.workTeacherTasks();
   }
 }
@@ -69,5 +83,7 @@ console.log(createEmployee("500")); // Should return an instance of Director
 console.log(createEmployee("$1000")); // Should return an instance of Director
 console.log(executeWork(createEmployee(200))); // Should return "Getting to work"
 console.log(executeWork(createEmployee(1000))); // Should return "Getting to director tasks"
+console.log(teachClass("Math")); // Should return "Teaching Math"
+console.log(teachClass("History")); // Should return "Teaching History"
 
-export {Director, Teacher, createEmployee, DirectorInterface, TeacherInterface};
+export {Director, Teacher, createEmployee, DirectorInterface, TeacherInterface, teachClass, executeWork, isDirector};
